@@ -1,0 +1,399 @@
+Problem Statement
+
+1. Title
+
+Fleet Maintenance Scheduling Platform
+
+---
+
+2. Domain
+
+Fleet Management / Transportation Technology / Smart Mobility
+
+---
+
+3. Who is the User?
+
+Fleet Manager
+
+Manages the organization's vehicles, monitors their maintenance requirements, schedules preventive maintenance and tracks the overall maintenance status of the fleet.
+
+Maintenance Officer
+
+Views assigned maintenance tasks, checks vehicle maintenance requirements, records service activities and updates maintenance status.
+
+Administrator
+
+Manages users, vehicles, maintenance categories and monitors the overall fleet maintenance system.
+
+---
+
+4. What Problem Are We Solving?
+
+Organizations that operate multiple vehicles often depend on manual records, spreadsheets or separate systems to manage vehicle maintenance. As the number of vehicles increases, it becomes difficult to accurately track service schedules, maintenance history, mileage and upcoming maintenance requirements.
+
+For example, a company may operate a fleet of 50 delivery vehicles. Each vehicle may have different service intervals based on its mileage, previous maintenance and vehicle type. If these details are maintained manually, a maintenance schedule can easily be missed. Delayed maintenance can increase the possibility of vehicle breakdowns, unexpected repair expenses, vehicle downtime and disruption to daily operations.
+
+There is also often no centralized system that allows fleet managers and maintenance staff to easily view the current maintenance status of every vehicle.
+
+The Fleet Maintenance Scheduling Platform aims to solve this problem by providing a centralized application for managing vehicles, scheduling preventive maintenance, tracking service history and monitoring upcoming and overdue maintenance.
+
+---
+
+5. Proposed Solution
+
+The application will provide a centralized platform that helps organizations efficiently manage fleet vehicles and their maintenance activities.
+
+The system will store vehicle information, maintenance records and service schedules in a centralized database. Fleet managers can schedule maintenance based on service dates or mileage intervals, while maintenance officers can view assigned tasks and update their completion status.
+
+The system will also provide dashboards and notifications to help users identify upcoming and overdue maintenance.
+
+Main Features Include:
+
+- User registration and login
+- Role-based access control
+- Vehicle registration and management
+- Vehicle profile and details
+- Vehicle type/category management
+- Vehicle status management
+- Maintenance type management
+- Preventive maintenance scheduling
+- Maintenance based on service date
+- Maintenance based on mileage/service interval
+- Upcoming maintenance tracking
+- Overdue maintenance identification
+- Maintenance task assignment
+- Maintenance status updates
+- Maintenance completion records
+- Maintenance history tracking
+- Maintenance notes and service details
+- Vehicle search and filtering
+- Maintenance search and filtering
+- Dashboard with fleet statistics
+- Upcoming maintenance dashboard
+- Overdue maintenance dashboard
+- Maintenance reports
+- Notifications/reminders
+- Admin dashboard
+- User and role management
+- Smart maintenance prediction as the enhancement feature
+
+---
+
+6. Core Entities / Database Tables
+
+The initial system will contain the following core database entities:
+
+1. User
+2. Role
+3. Vehicle
+4. VehicleType
+5. Maintenance
+6. MaintenanceType
+7. MaintenanceSchedule
+8. MaintenanceAssignment
+9. MaintenanceHistory
+10. Notification
+
+Main Relationships
+
+User → Role
+
+A user has a specific role such as Fleet Manager, Maintenance Officer or Administrator.
+
+Vehicle → VehicleType
+
+Each vehicle belongs to a particular vehicle type.
+
+Vehicle → Maintenance
+
+A vehicle can have multiple maintenance records.
+
+Vehicle → MaintenanceSchedule
+
+Each vehicle can have one or more scheduled maintenance activities.
+
+Maintenance → MaintenanceType
+
+Each maintenance activity belongs to a particular maintenance type such as oil service, brake inspection or general service.
+
+Maintenance → MaintenanceAssignment
+
+Maintenance tasks can be assigned to maintenance officers.
+
+Maintenance → MaintenanceHistory
+
+Completed maintenance activities are stored as historical records.
+
+User → Notification
+
+Users can receive notifications about upcoming or overdue maintenance.
+
+---
+
+7. User Roles & Permissions
+
+Fleet Manager
+
+- Register/login
+- View fleet dashboard
+- Add new vehicles
+- Edit vehicle information
+- View all vehicles
+- Search and filter vehicles
+- Create maintenance schedules
+- Set maintenance due dates
+- Set mileage-based maintenance intervals
+- View upcoming maintenance
+- View overdue maintenance
+- Assign maintenance tasks
+- Monitor maintenance progress
+- View maintenance history
+- Generate maintenance reports
+- Receive maintenance reminders
+
+Maintenance Officer
+
+- Login
+- View assigned maintenance tasks
+- View vehicle details
+- View maintenance requirements
+- Update maintenance status
+- Add service details
+- Add maintenance notes
+- Record completed maintenance
+- Update service date and mileage
+- View previous maintenance history
+- Mark assigned tasks as completed
+
+Administrator
+
+- Login
+- Manage users
+- Manage user roles
+- Manage vehicles
+- Manage vehicle types
+- Manage maintenance types
+- Manage maintenance categories
+- Assign maintenance officers
+- Monitor all maintenance activities
+- View all vehicles and maintenance records
+- View system statistics
+- Manage system settings
+
+---
+
+8. Success Criteria
+
+The project will be considered successful when:
+
+- A user can securely register and log in to the application.
+- A Fleet Manager can add and manage vehicles.
+- The system can store vehicle information in the database.
+- A Fleet Manager can schedule maintenance for a vehicle.
+- Maintenance can be scheduled based on date or mileage.
+- The system can identify upcoming maintenance.
+- The system can identify overdue maintenance.
+- Maintenance Officers can view their assigned tasks.
+- Maintenance Officers can update maintenance status.
+- Completed maintenance can be recorded and stored as history.
+- Users can view the complete maintenance history of a vehicle.
+- Users can search and filter vehicle and maintenance records.
+- The dashboard can display useful fleet maintenance statistics.
+- The system can provide reminders for upcoming maintenance.
+- The application should work reliably without major errors.
+- The application should be accessible through a public URL by Day 41, as required by the capstone plan.
+- The project should maintain a clean and organized GitHub repository.
+- The project should maintain regular and meaningful GitHub commits throughout development.
+- The system should follow proper backend architecture and database practices.
+- The smart maintenance enhancement should provide useful predictions or recommendations based on available vehicle maintenance data.
+
+---
+
+9. Out of Scope
+
+The following features are outside the scope of the initial project:
+
+- Direct integration with government transportation systems
+- Automatic physical vehicle repair
+- Remote control of vehicles
+- Real-time GPS tracking
+- Real-time engine monitoring
+- Direct IoT sensor integration
+- Automatic vehicle fault diagnosis using physical sensors
+- Processing maintenance payments
+- Purchasing spare parts through the application
+- Automatic spare-parts inventory management
+- Direct booking with external vehicle service centers
+- Integration with insurance companies
+- Integration with fuel stations
+- Emergency roadside assistance
+- Training a large AI/ML model from scratch
+- Fully automated maintenance decisions without human verification
+
+---
+
+10. Chosen Track
+
+Technology Stack
+
+Programming Language: Java 17
+
+Backend: Spring Boot 3.x
+
+Frontend: React.js
+
+Database: MySQL
+
+Authentication: Spring Security + JWT
+
+API: RESTful APIs
+
+ORM: Spring Data JPA / Hibernate
+
+Version Control: Git + GitHub
+
+API Testing: Postman
+
+Build Tool: Maven
+
+Deployment: Cloud deployment
+
+---
+
+11. Development Architecture
+
+The application will follow a layered architecture to keep the code modular and maintainable.
+
+React.js Frontend
+        ↓
+REST API
+        ↓
+Spring Boot Controller
+        ↓
+Service Layer
+        ↓
+Repository Layer
+        ↓
+MySQL Database
+
+Backend Structure
+
+Controller
+    ↓
+Service
+    ↓
+Repository
+    ↓
+Database
+
+This structure will make the application easier to test, maintain and extend.
+
+---
+
+12. Core Modules
+
+Module 1 — Authentication & User Management
+
+- Registration
+- Login
+- JWT authentication
+- Role-based authorization
+- User management
+
+Module 2 — Vehicle Management
+
+- Add vehicle
+- View vehicles
+- Update vehicle
+- Delete vehicle
+- Vehicle search
+- Vehicle filtering
+- Vehicle status
+
+Module 3 — Maintenance Management
+
+- Add maintenance record
+- View maintenance records
+- Update maintenance
+- Maintenance types
+- Maintenance status
+- Maintenance history
+
+Module 4 — Maintenance Scheduling
+
+- Create maintenance schedule
+- Set service date
+- Set mileage interval
+- Upcoming maintenance
+- Overdue maintenance
+- Schedule status
+
+Module 5 — Dashboard
+
+- Total vehicles
+- Active vehicles
+- Vehicles under maintenance
+- Upcoming maintenance
+- Overdue maintenance
+- Completed maintenance
+- Maintenance statistics
+
+Module 6 — Notification & Reminder
+
+- Upcoming maintenance reminders
+- Overdue maintenance alerts
+- Task assignment notifications
+- Maintenance completion notifications
+
+Module 7 — Reports
+
+- Vehicle maintenance history
+- Upcoming maintenance report
+- Overdue maintenance report
+- Completed maintenance report
+- Fleet maintenance statistics
+
+Module 8 — Smart Enhancement
+
+The advanced feature will analyze available vehicle and maintenance information to provide smart maintenance recommendations or predictions.
+
+For example:
+
+Vehicle
+↓
+Previous maintenance history
+↓
+Mileage / service interval
+↓
+Maintenance records
+↓
+Analysis
+↓
+Recommended next maintenance
+
+The smart feature will be added after the core application is working so that it does not affect the basic functionality of the project.
+
+---
+
+13. Expected Outcome
+
+The final application will provide fleet operators with a centralized platform for managing vehicle maintenance activities.
+
+Instead of depending on separate spreadsheets or manual reminders, users will be able to manage vehicles, schedule maintenance, track service history, identify overdue maintenance and monitor fleet maintenance activities from a single application.
+
+The completed project will demonstrate practical implementation of:
+
+- Java
+- Spring Boot
+- React.js
+- MySQL
+- REST APIs
+- Authentication
+- Database relationships
+- CRUD operations
+- Git/GitHub
+- Cloud deployment
+- Software architecture
+- Testing
+- Smart/AI-based enhancement
