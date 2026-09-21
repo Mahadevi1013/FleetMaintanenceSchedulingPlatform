@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FleetCare - Fleet Maintenance Management</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =====================================================
+     LOGIN PAGE
+===================================================== -->
+
+<div id="loginPage" class="login-page">
+
+    <div class="login-container">
+
+        <div class="login-icon">🚛</div>
+
+        <h1>FleetCare</h1>
+
+        <p class="subtitle">
+            Fleet Maintenance Management
+        </p>
+
+        <form id="loginForm">
+
+            <label for="email">Email</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="password">Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button
+                type="submit"
+                class="primary-btn"
+            >
+                Login
+            </button>
+
+            <p id="loginMessage"></p>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     APPLICATION
+===================================================== -->
+
+<div id="app" class="app hidden">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🚛
+            </div>
+
+            <div class="logo-text">
+                FleetCare
+            </div>
+
+        </div>
+
+
+        <!-- USER INFO -->
+
+        <div class="user-info">
+
+            <div class="user-avatar">
+                A
+            </div>
+
+            <div class="user-details">
+
+                <strong>
+                    Administrator
+                </strong>
+
+                <span>
+                    Fleet Manager
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="sidebar-menu">
+
+            <button
+                class="menu-item active"
+                data-section="dashboardSection"
+            >
+                <span>📊</span>
+                <span>Dashboard</span>
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-section="vehiclesSection"
+            >
+                <span>🚚</span>
+                <span>Vehicles</span>
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-section="maintenanceTypesSection"
+            >
+                <span>🔧</span>
+                <span>Maintenance Types</span>
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-section="schedulesSection"
+            >
+                <span>📅</span>
+                <span>Maintenance Schedules</span>
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-section="historySection"
+            >
+                <span>📋</span>
+                <span>Maintenance History</span>
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-section="usersSection"
+            >
+                <span>👥</span>
+                <span>Users</span>
+            </button>
+
+
+            <button
+                class="menu-item"
+                data-section="notificationsSection"
+            >
+                <span>🔔</span>
+                <span>Notifications</span>
+            </button>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <button
+            class="logout-btn"
+            onclick="logout()"
+        >
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <h2 id="pageTitle">
+                    Dashboard
+                </h2>
+
+                <p>
+                    Fleet Maintenance Management System
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <span class="status-dot"></span>
+
+                <span>
+                    Backend Connected
+                </span>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <section
+            id="dashboardSection"
+            class="page-section"
+        >
+
+            <!-- WELCOME -->
+
+            <div class="welcome">
+
+                <div>
+
+                    <h1>
+                        Fleet Dashboard 👋
+                    </h1>
+
+                    <p>
+                        Monitor vehicles and maintenance
+                        activities from one place.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="loadDashboard()"
+                >
+                    🔄 Refresh
+                </button>
+
+            </div>
+
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats-grid">
+
+
+                <!-- VEHICLES -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🚚
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p>
+                            Total Vehicles
+                        </p>
+
+                        <h2 id="vehicleCount">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SCHEDULES -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📅
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p>
+                            Total Schedules
+                        </p>
+
+                        <h2 id="scheduleCount">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PENDING -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ⏳
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p>
+                            Pending
+                        </p>
+
+                        <h2 id="pendingCount">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMPLETED -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ✅
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p>
+                            Completed
+                        </p>
+
+                        <h2 id="completedCount">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RECENT SCHEDULES -->
+
+            <div class="content-card">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Recent Maintenance Schedules
+                        </h2>
+
+                        <p>
+                            Latest scheduled maintenance activities
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="secondary-btn"
+                        onclick="showSection('schedulesSection')"
+                    >
+                        View All
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Vehicle</th>
+
+                                <th>Maintenance Type</th>
+
+                                <th>Date</th>
+
+                                <th>Status</th>
+
+                                <th>Priority</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="dashboardScheduleTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             VEHICLES
+        ================================================== -->
+
+        <section
+            id="vehiclesSection"
+            class="page-section hidden"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h1>
+                        Vehicles
+                    </h1>
+
+                    <p>
+                        Manage your fleet vehicles
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="openVehicleForm()"
+                >
+                    + Add Vehicle
+                </button>
+
+            </div>
+
+
+
+            <!-- VEHICLE FORM -->
+
+            <div
+                id="vehicleFormContainer"
+                class="form-card hidden"
+            >
+
+                <h2 id="vehicleFormTitle">
+                    Add Vehicle
+                </h2>
+
+
+                <form id="vehicleForm">
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Vehicle Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="vehicleNumber"
+                                placeholder="TN01AB1234"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Manufacturer
+                            </label>
+
+                            <input
+                                type="text"
+                                id="manufacturer"
+                                placeholder="Tata"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Model
+                            </label>
+
+                            <input
+                                type="text"
+                                id="vehicleModel"
+                                placeholder="Prima"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Vehicle Type ID
+                            </label>
+
+                            <input
+                                type="number"
+                                id="vehicleTypeId"
+                                placeholder="1"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Current Mileage
+                            </label>
+
+                            <input
+                                type="number"
+                                id="currentMileage"
+                                placeholder="45000"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Status
+                            </label>
+
+                            <select id="vehicleStatus">
+
+                                <option value="ACTIVE">
+                                    ACTIVE
+                                </option>
+
+                                <option value="INACTIVE">
+                                    INACTIVE
+                                </option>
+
+                                <option value="MAINTENANCE">
+                                    MAINTENANCE
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            class="primary-btn"
+                        >
+                            Save Vehicle
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            onclick="closeVehicleForm()"
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+
+                    <p id="vehicleMessage"></p>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- VEHICLE TABLE -->
+
+            <div class="content-card">
+
+                <div class="search-row">
+
+                    <input
+                        type="text"
+                        id="vehicleSearch"
+                        placeholder="🔍 Search vehicle..."
+                        oninput="filterVehicles()"
+                    >
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Vehicle Number</th>
+
+                                <th>Manufacturer</th>
+
+                                <th>Model</th>
+
+                                <th>Mileage</th>
+
+                                <th>Status</th>
+
+                                <th>Action</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="vehicleTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MAINTENANCE TYPES
+        ================================================== -->
+
+        <section
+            id="maintenanceTypesSection"
+            class="page-section hidden"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h1>
+                        Maintenance Types
+                    </h1>
+
+                    <p>
+                        Manage maintenance categories
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="openMaintenanceTypeForm()"
+                >
+                    + Add Type
+                </button>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <div
+                id="maintenanceTypeFormContainer"
+                class="form-card hidden"
+            >
+
+                <h2>
+                    Add Maintenance Type
+                </h2>
+
+
+                <form id="maintenanceTypeForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="maintenanceTypeName"
+                                placeholder="Oil Change"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Description
+                            </label>
+
+                            <input
+                                type="text"
+                                id="maintenanceTypeDescription"
+                                placeholder="Engine oil replacement"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            class="primary-btn"
+                        >
+                            Save Type
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            onclick="closeMaintenanceTypeForm()"
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+
+                    <p id="maintenanceTypeMessage"></p>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- TABLE -->
+
+            <div class="content-card">
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Name</th>
+
+                                <th>Description</th>
+
+                                <th>Action</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="maintenanceTypeTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCHEDULES
+        ================================================== -->
+
+        <section
+            id="schedulesSection"
+            class="page-section hidden"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h1>
+                        Maintenance Schedules
+                    </h1>
+
+                    <p>
+                        Schedule and monitor preventive maintenance
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="openScheduleForm()"
+                >
+                    + Add Schedule
+                </button>
+
+            </div>
+
+
+
+            <!-- SCHEDULE FORM -->
+
+            <div
+                id="scheduleFormContainer"
+                class="form-card hidden"
+            >
+
+                <h2>
+                    Create Maintenance Schedule
+                </h2>
+
+
+                <form id="scheduleForm">
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Vehicle ID
+                            </label>
+
+                            <input
+                                type="number"
+                                id="scheduleVehicleId"
+                                placeholder="1"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Maintenance Type ID
+                            </label>
+
+                            <input
+                                type="number"
+                                id="scheduleMaintenanceTypeId"
+                                placeholder="1"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Scheduled Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="scheduledDate"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Scheduled Mileage
+                            </label>
+
+                            <input
+                                type="number"
+                                id="scheduledMileage"
+                                placeholder="50000"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Priority
+                            </label>
+
+                            <select id="schedulePriority">
+
+                                <option value="LOW">
+                                    LOW
+                                </option>
+
+                                <option value="MEDIUM">
+                                    MEDIUM
+                                </option>
+
+                                <option value="HIGH">
+                                    HIGH
+                                </option>
+
+                                <option value="URGENT">
+                                    URGENT
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Status
+                            </label>
+
+                            <select id="scheduleStatus">
+
+                                <option value="PENDING">
+                                    PENDING
+                                </option>
+
+                                <option value="IN_PROGRESS">
+                                    IN_PROGRESS
+                                </option>
+
+                                <option value="COMPLETED">
+                                    COMPLETED
+                                </option>
+
+                                <option value="CANCELLED">
+                                    CANCELLED
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group full-width">
+
+                            <label>
+                                Notes
+                            </label>
+
+                            <textarea
+                                id="scheduleNotes"
+                                rows="4"
+                                placeholder="Enter maintenance notes..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            class="primary-btn"
+                        >
+                            Save Schedule
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            onclick="closeScheduleForm()"
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+
+                    <p id="scheduleMessage"></p>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- SCHEDULE TABLE -->
+
+            <div class="content-card">
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Vehicle</th>
+
+                                <th>Maintenance Type</th>
+
+                                <th>Date</th>
+
+                                <th>Mileage</th>
+
+                                <th>Status</th>
+
+                                <th>Priority</th>
+
+                                <th>Action</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="scheduleTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MAINTENANCE HISTORY
+        ================================================== -->
+
+        <section
+            id="historySection"
+            class="page-section hidden"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h1>
+                        Maintenance History
+                    </h1>
+
+                    <p>
+                        View completed maintenance activities
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="secondary-btn"
+                    onclick="loadHistory()"
+                >
+                    🔄 Refresh
+                </button>
+
+            </div>
+
+
+            <div class="content-card">
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Vehicle</th>
+
+                                <th>Maintenance Type</th>
+
+                                <th>Description</th>
+
+                                <th>Service Date</th>
+
+                                <th>Mileage</th>
+
+                                <th>Status</th>
+
+                                <th>Notes</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="historyTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             USERS
+        ================================================== -->
+
+        <section
+            id="usersSection"
+            class="page-section hidden"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h1>
+                        Users
+                    </h1>
+
+                    <p>
+                        Manage system users
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="content-card">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        👥
+                    </div>
+
+                    <h2>
+                        User Management
+                    </h2>
+
+                    <p>
+                        User management will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             NOTIFICATIONS
+        ================================================== -->
+
+        <section
+            id="notificationsSection"
+            class="page-section hidden"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <h1>
+                        Notifications
+                    </h1>
+
+                    <p>
+                        Maintenance alerts and notifications
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="content-card">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        🔔
+                    </div>
+
+                    <h2>
+                        Notifications
+                    </h2>
+
+                    <p>
+                        Notifications will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
