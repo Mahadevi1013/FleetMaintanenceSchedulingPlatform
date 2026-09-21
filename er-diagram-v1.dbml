@@ -1,0 +1,106 @@
+Table roles {
+  id bigint [pk, increment]
+  name varchar(50) [not null, unique]
+}
+
+Table users {
+  id bigint [pk, increment]
+  name varchar(100) [not null]
+  email varchar(150) [not null, unique]
+  password varchar(255) [not null]
+  role_id bigint [not null]
+  created_at timestamp
+}
+
+Table vehicle_types {
+  id bigint [pk, increment]
+  name varchar(100) [not null, unique]
+  description text
+}
+
+Table vehicles {
+  id bigint [pk, increment]
+  vehicle_number varchar(50) [not null, unique]
+  vehicle_type_id bigint [not null]
+  model varchar(100)
+  manufacturer varchar(100)
+  registration_date date
+  current_mileage bigint
+  status varchar(50)
+  created_at timestamp
+}
+
+Table maintenance_types {
+  id bigint [pk, increment]
+  name varchar(100) [not null, unique]
+  description text
+}
+
+Table maintenances {
+  id bigint [pk, increment]
+  vehicle_id bigint [not null]
+  maintenance_type_id bigint [not null]
+  description text
+  service_date date
+  mileage bigint
+  status varchar(50)
+  notes text
+  created_at timestamp
+}
+
+Table maintenance_schedules {
+  id bigint [pk, increment]
+  vehicle_id bigint [not null]
+  maintenance_type_id bigint [not null]
+  due_date date
+  due_mileage bigint
+  status varchar(50)
+  created_at timestamp
+}
+
+Table maintenance_assignments {
+  id bigint [pk, increment]
+  maintenance_id bigint [not null]
+  user_id bigint [not null]
+  assigned_date date
+  status varchar(50)
+}
+
+Table maintenance_history {
+  id bigint [pk, increment]
+  maintenance_id bigint [not null]
+  vehicle_id bigint [not null]
+  completed_date date
+  completed_mileage bigint
+  service_details text
+  notes text
+}
+
+Table notifications {
+  id bigint [pk, increment]
+  user_id bigint [not null]
+  maintenance_id bigint
+  message text [not null]
+  notification_type varchar(50)
+  is_read boolean
+  created_at timestamp
+}
+
+Ref: users.role_id > roles.id
+
+Ref: vehicles.vehicle_type_id > vehicle_types.id
+
+Ref: maintenances.vehicle_id > vehicles.id
+Ref: maintenances.maintenance_type_id > maintenance_types.id
+
+Ref: maintenance_schedules.vehicle_id > vehicles.id
+Ref: maintenance_schedules.maintenance_type_id > maintenance_types.id
+
+Ref: maintenance_assignments.maintenance_id > maintenances.id
+Ref: maintenance_assignments.user_id > users.id
+
+Ref: maintenance_history.maintenance_id > maintenances.id
+Ref: maintenance_history.vehicle_id > vehicles.id
+
+Ref: notifications.user_id > users.id
+Ref: notifications.maintenance_id > maintenances.id
